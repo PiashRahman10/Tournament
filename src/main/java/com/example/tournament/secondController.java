@@ -15,8 +15,12 @@ public class secondController {
     public Stage stage;
     public Scene scene;
     public Parent root;
-    public void secondgamesaction(ActionEvent event){
-
+    public void secondgamesaction(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Tournament.class.getResource("DemoGames.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     public void secondtournamentaction(ActionEvent event){
 
