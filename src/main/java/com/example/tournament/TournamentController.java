@@ -15,9 +15,7 @@ import javafx.stage.Stage;
 import java.io.FileOutputStream;
 import java.io.*;
 import java.io.ObjectOutputStream;
-import java.util.Formatter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class TournamentController {
     @FXML
@@ -73,20 +71,29 @@ public class TournamentController {
 
     @FXML
     private Label warninglabel;
+    ArrayList<String> list=new ArrayList<>();
 
     @FXML
     void Loginaction(ActionEvent event) throws IOException {
-        System.out.println("hello");
-       root = FXMLLoader.load(getClass().getResource("second.fxml"));
-        //root = FXMLLoader.load(Tournament.class.getResource("second.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-//        stage = (Stage)loginbutton.getScene().getWindow();
-//        stage.setScene(new Scene(root));
-
-
+        try{
+            File fl=new File("src/main/java/com/example/tournament/List");
+            Scanner scn=new Scanner(fl);
+            while (scn.hasNext()){
+                String n=scn.next() ;
+                String p=scn.next();
+                if(n.equals(loginusernamefield.getText()) && p.equals(loginpasswordfield.getText())){
+                    root = FXMLLoader.load(getClass().getResource("second.fxml"));
+                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                }else {
+                    registerwarninglabel.setText("wrong password or usename ");
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -95,29 +102,29 @@ public class TournamentController {
          String Username=registerusernamefield.getText();
         String Email=registeremailfield.getText();
         String password=registerpassword.getText();
+           if(Fullname.equals("")|| Username.equals("")||Email.equals("")||password.equals(""))  {
+               registerwarninglabel.setText("Somthing went Wrong!! Please try again");
+           }else {
+               boolean k = list.contains(registertournamentlabel.getText());
+               System.out.println(k);
+               if(k==true){
+                   registerwarninglabel.setText("This username is already exist!!");
+               } else {
 
-        user s = new user(Fullname,Username,Email,password);
-      // HashMap<String,user> map=new HashMap<>();
-      //  map.put(Username,new user(Fullname,Username,Email,password));
-        FileOutputStream f=new FileOutputStream("src/main/java/com/example/tournament/Register_info.txt",true);
-//        File file=new File("src/main/java/com/example/tournament/List");
-//         FileWriter filewrite=new FileWriter(file,true);
-//        filewrite.write(Username+"\n");
-//        filewrite.write("\n");
-//        filewrite.close();
-        Formatter formatter=new Formatter("src/main/java/com/example/tournament/List");
-        formatter.format("%s \r\n",Username);
-        formatter.close();
-        ObjectOutputStream ob=new ObjectOutputStream(f);
-        ob.writeObject(s);
-        ob.close();
+                       list.add(Username);
+                       File file=new File("src/main/java/com/example/tournament/List");
+                       FileWriter filewrite=new FileWriter(file,true);
+                       filewrite.write(Username+" ");
+                       filewrite.write(password+"\n");
 
-        root = FXMLLoader.load(Tournament.class.getResource("second.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+                   root = FXMLLoader.load(Tournament.class.getResource("second.fxml"));
+                   stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                   scene = new Scene(root);
+                   stage.setScene(scene);
+                   stage.show();
+               }
 
+           }
 
     }
 

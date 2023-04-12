@@ -88,7 +88,7 @@
                   <TextField fx:id="registeremailfield" layoutX="153.0" layoutY="234.0" prefHeight="34.0" prefWidth="342.0" promptText="E-mail" />
                   <PasswordField fx:id="registerpassword" layoutX="153.0" layoutY="295.0" prefHeight="34.0" prefWidth="343.0" promptText="Password" />
                   <Button fx:id="registerbutton" layoutX="260.0" layoutY="349.0" mnemonicParsing="false" onAction="#registeraction" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: green;" text="Register" textFill="WHITE" />
-                  <Label fx:id="registerwarninglabel" layoutX="70.0" layoutY="388.0" prefHeight="22.0" prefWidth="548.0" text="***" />
+                  <Label fx:id="registerwarninglabel" layoutX="70.0" layoutY="388.0" prefHeight="22.0" prefWidth="548.0" />
                   <Label fx:id="registertournamentlabel" layoutX="134.0" prefHeight="95.0" prefWidth="472.0" text="Tournament">
                      <font>
                         <Font name="System Bold Italic" size="69.0" />
