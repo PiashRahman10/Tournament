@@ -91,6 +91,7 @@ public class TournamentController {
                     registerwarninglabel.setText("wrong password or usename ");
                 }
             }
+            scn.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -105,7 +106,9 @@ public class TournamentController {
            if(Fullname.equals("")|| Username.equals("")||Email.equals("")||password.equals(""))  {
                registerwarninglabel.setText("Somthing went Wrong!! Please try again");
            }else {
-               boolean k = list.contains(registertournamentlabel.getText());
+
+               boolean k = list.contains(registerusernamefield.getText());
+
                System.out.println(k);
                if(k==true){
                    registerwarninglabel.setText("This username is already exist!!");
@@ -116,7 +119,7 @@ public class TournamentController {
                        FileWriter filewrite=new FileWriter(file,true);
                        filewrite.write(Username+" ");
                        filewrite.write(password+"\n");
-
+                       filewrite.close();
                    root = FXMLLoader.load(Tournament.class.getResource("second.fxml"));
                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                    scene = new Scene(root);
